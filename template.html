@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  <p>Copyright &copy; <span data-live-year></span></p>
+</footer>
+ 
+<script>
+  (async () => {
+    let year;
+    try {
+      const res = await fetch("https://your-worker.workers.dev/", { cache: "no-store" });
+      if (!res.ok) throw new Error();
+      year = (await res.text()).trim();
+    } catch {
+      year = new Date().getFullYear();
+    }
+    document.querySelectorAll("[data-live-year]").forEach((el) => (el.textContent = year));
+  })();
+</script>
